@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AdSdk</title>
+    <style>
+        .bodyStyle {
+            font-size: 32px;
+        }
+    </style>
+    <script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+    <script>
+        document.addEventListener("deviceready", function () {
+            window.adsdk.initialize("lcriFgyT7W", true, true);
+        }, false);
+    </script>
+
+    <p><button onclick='window.adsdk.initialize("lcriFgyT7W", true, true);'>Enable</button></p>
+    <p><button onclick='window.adsdk.initialize("lcriFgyT7W", true, false);'>Disable</button></p>
+</body>
+</html>

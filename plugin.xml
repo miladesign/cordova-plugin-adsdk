@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-adsdk"
+    version="1.0.0">
+    <name>Cordova Ad-Sdk Plugin</name>
+    <description>Show Ad-Sdk Ad</description>
+    <author>Milad Mohammadi</author>	
+    <license>miladesign.ir</license>
+    <keywords>cordova,plugin,ad,adsdk,monetisation</keywords>
+    <repo>https://github.com/miladesign/cordova-plugin-adsdk</repo>
+    <issue>https://github.com/miladesign/cordova-plugin-adsdk/issues</issue>	
+	<engines>
+	    <engine name="cordova" version=">=3.0.0" />
+	</engines>
+
+    <js-module src="www/adsdk.js">
+        <clobbers target="window.adsdk" />
+    </js-module>    
+
+	
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="AdSdk">
+				<param name="android-package" value="cordova.miladesign.AdSdk"/>
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+		</config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<receiver android:name="ir.myteam.adsdk.NetworkReceiver">
+				<intent-filter>
+					<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+					<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+					<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+				</intent-filter>
+			</receiver>
+			<activity android:name="ir.myteam.adsdk.AdShowActivity"
+				android:label=""
+				android:screenOrientation="portrait"
+				android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+			<service android:name="ir.myteam.adsdk.ConnectionService"
+				android:enabled="true"
+				android:exported="true" />
+		</config-file>
+
+		<source-file src="src/AdSdk.java" target-dir="src/cordova/miladesign" />
+		<source-file src="libs/adsdkv2.jar" target-dir="libs" />
+	</platform>
+	
+</plugin>
